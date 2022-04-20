@@ -1,0 +1,9 @@
+﻿RewriteEngine On    # Turn on the rewriting engine
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+####RewriteRule ^(.*)$ /index.php?/$1 [L,QSA]
+###RewriteRule ^api/([0-9a-zA-Z_-]*)$ api.php?order_id=$1 [NC,L]
+###RewriteCond %{REQUEST_FILENAME}.php -f
+###RewriteRule ^(.*?)/?$ /$1.php [NC,L]
+RewriteRule ^([^\.]+)$ $1.php [NC,L] 

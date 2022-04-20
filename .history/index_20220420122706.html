@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="./img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="./img/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./img/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>유성구 데이타시각화</title>
+    <!-- <link rel="stylesheet" href="css/index.css" /> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/main02.css" />
+    <link rel="stylesheet" href="./fonts/font.css" />
+    <link rel="stylesheet" href="./fonts/notosanskr/stylesheets/NotoSansKR-Hestia.css" />
+    <script src="./js/index.js"></script>
+</head>
+<style>
+    /* body{font-family: '맑은고딕', 'Malgun Gothic', 'dotum gulim', sans-serif;} */
+    /* body {
+        position: relative;
+        color: #555;
+        font-family: 'gothic','Malgun Gothic','맑은 고딕',Dotum,'돋움',Helvetica,"Apple SD Gothic Neo","애플 SD 산돌고딕 Neo",sans-serif;letter-spacing: -0.03em;
+        -webkit-text-size-adjust: none;
+        -webkit-font-smoothing: antialiased;
+        -webkit-touch-callout: none;
+    } */
+    /* .hd_wrapper .hd_menu nav > ul#main_menu > li:last-child{ position: relative; } */
+
+    #wrap {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu {
+        border: 1px solid #ccc;
+        background: #fcfafc;
+        position: absolute;
+        width: 160px;
+        text-align: center;
+        margin: 0;
+        opacity: 0;
+        visibility: none;
+        z-index: 999;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li {
+        border-bottom: 1px solid #ccc;
+        vertical-align: center;
+        width: 160px;
+        height: 80px;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a {
+        display: block;
+        padding: 0 25px;
+        color: #404751;
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 80px;
+        text-align: center;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a:hover>span {
+        color: #2b89c7;
+        transition: all 0.3s ease-out;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a>span {
+        position: relative;
+        text-align: center;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a:hover>span:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #2b89c7;
+        transition: all 0.3s ease-out;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a:hover>span:hover:after {
+        left: 0;
+        width: 100%;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li:hover #sub_menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* header #hd_menu > ul { font-size: 0; text-align: center; margin-left: 190px; box-sizing: border-box; float: right; } */
+    /* header #hd_menu >ul > li { display: inline-block; } */
+
+    /* ul#sub_menu { border:1px solid #ccc;background: #fcfafc;position:absolute; width:180px;height:auto;text-align: center; margin:0; opacity:0;visibility:none; z-index:999; } */
+
+
+    /* #main_menu > #sub_menu { border:1px solid #ccc;background: #fcfafc;position:absolute; width:180px;height:auto;text-align: center; margin:0; opacity:0;visibility:none; z-index:999; } */
+    /* #main_menu > #sub_menu > li { display:inline-block;border-bottom: 1px solid #ccc; line-height:82px; } */
+    /* #main_menu > #sub_menu > li > a { display:block; text-decoration: none;  } */
+    /* #main_menu > li:hover > #sub_menu { opacity:1;visibility:visible; }     */
+ 
+    footer{
+    /* display: block; */
+    /* margin: 10px 0 0; */
+    /* border: 1px solid; */
+    /* width: 100%; */
+    /* position:absolute; */
+    width: 100%;
+    height: 192px;
+    /* bottom: 0; */
+    background-color: #404751;
+    position: absolute;
+    bottom: 0;
+    }
+    footer > .inner > span#addr {
+    display: inline-block;
+    height: 30px;
+    font-size: 23px;
+    color: #c1c3c6;
+    margin-left: 250px;
+    margin-top: 64px;
+    /* line-height: 23px; */
+    }
+    footer > .inner > span#copy1 {
+    display: inline-block;
+    height: 30px;
+    font-size: 23px;
+    color: #c1c3c6;
+    margin-left: 250px;
+    /* margin-top: 64px; */
+    /* line-height: 23px; */
+    }
+</style>
+
+<body>
+    <!-- main02.html -->
+    <a href="#contents" class="skip">본문바로가기</a>
+    <div id="wrap">
+        <!-- main content-->
+        <!-- <a href="#contents" class="skip">본문바로가기</a> -->
+        <!-- HEADER PART -->
+        <!-- <header include-html="header.html"></header> -->
+        <header>
+            <div class="hd_wrapper">
+                <h1>
+                    <a href="./index.html">유성구데이타시각화</a>
+                </h1>
+                <!-- <a href="./main02.html"><img class="logo" src="yuseong_logo.png" alt="유성구데이타시각화로고"></a> -->
+                <h2 class="hide">대메뉴</h2>
+
+                <div class="hd_menu">
+                    <!-- 메안메뉴시작 -->
+                    <nav>
+                        <ul id="main_menu">
+                            <li>
+                                <a href="./sub_1_1.html"><span>가게현황 분석</span></a>
+                                <ul id="sub_menu">
+                                    <li><a href="./sub_1_1.html"><span>법정동별</span></a></li>
+                                    <li><a href="./sub_1_2.html"><span>상권별</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="./sub_2.html"><span>매출정보 분석</span></a>
+                            </li>
+                            <li>
+                                <a href="./sub_3.html"><span>유동인구 분석</span></a>
+                            </li>
+                            <li>
+                                <a href="./sub_4.html"><span>온통대전 소비분석</a>
+                            </li>
+                            <li>
+                                <a href="./sub_5.html"><span>방문객 소비분석</span></a>
+                            </li>
+                            <li>
+                                <a href="./sub_about.html"><span>도움말</span></a>
+                                <ul id="sub_menu">
+                                    <li><a href="./sub_about.html"><span>사이트소개</span></a></li>
+                                    <li><a href="./sub_sitemap.html"><span>사이트맵</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- HEADER PART END -->
+
+        <!-- CONTENTS PART -->
+        <div class="contents">
+            <h2 class="hide">컨텐츠</h2>
+            <div class="main_slider">
+                <h2 class="hide">메인슬라이드</h2>
+                <img src="main_img.png" alt="메인슬라이드">
+                <div class="me"></div>
+                <div class="slider_title">
+                    <h1>유성구 동네상권 알아보기</h1>
+                </div>
+            </div>
+            <div class="card_menu">
+                <div class="card_inner">
+                    <div class="card">
+                        <h3>가게현황분석</h3>
+                        <div>
+                            <img src="item01.png" alt="가게현황분석">
+                        </div>
+                        <a href="sub_1.html">바로가기<image src="left-arrow.png" alt="바로가기"></a>
+                    </div>
+                    <div class="card">
+                        <h3>매출현황분석</h3>
+                        <div>
+                            <img src="item02.png" alt="매출현황분석">
+                        </div>
+                        <a href="./sub_2.html">바로가기<image src="left-arrow.png" alt="바로가기"></image></a>
+                    </div>
+                    <div class="card">
+                        <h3>유동인구분석</h3>
+                        <div>
+                            <img src="item03.png" alt="유동인구분석">
+                        </div>
+                        <a href="./sub_3.html">바로가기<image src="left-arrow.png" alt="바로가기"></image></a>
+                    </div>
+                    <div class="card">
+                        <h3>온통대전소비분석</h3>
+                        <div>
+                            <img src="item04.png" alt="온통대전소비분석">
+                        </div>
+                        <a href="./sub_4.html">바로가기<image src="left-arrow.png" alt="바로가기"></image></a>
+                    </div>
+                    <div class="card">
+                        <h3>방문객소비분석</h3>
+                        <div>
+                            <img src="item05.png" alt="방문객소비분석">
+                        </div>
+                        <a href="./sub_5.html">바로가기<image src="left-arrow.png" alt="바로가기"></image></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--CONTENTS PART END-->
+
+        <!-- FOOTER PART -->
+        <footer include-html="footer.html"></footer>
+        <!-- FOOTER PART END-->
+    </div>
+    <script type="text/javascript">
+        includeHTML();
+    </script>
+</body>
+
+</html>

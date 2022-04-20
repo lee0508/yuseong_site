@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유성구 데이터시작화</title>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER   -->
+        <header>
+            <img src="yuseong_logo.png" alt="유성구" />
+            <div class="hd_menu">
+                <ul>
+                    <li><a href="#!">가게현황알아보기</a></li>
+                    <li><a href="#!">매출정보알아보기</a></li>
+                    <li><a href="#!">유동인구알아보기</a></li>
+                    <li><a href="#!">온통대전소비분석</a></li>
+                    <li><a href="#!">방문소비분석</a></li>
+                    <li><a href="#!">도움말</a></li>
+
+                </ul>
+            </div>
+        </header>
+        
+        <!-- TIITLE   -->
+        <div class="hd_title">
+            <h1>유성구 데이타시각화</h1>
+        </div>
+        <!-- MAIN SLIDER   -->
+        <div class="main_slider">
+            <div class="slider1">
+                <img src="https://via.placeholder.com/1080x640" alt="">
+            </div>
+            <div class="slider2">
+                <img src="https://via.placeholder.com/1080x640" alt="">
+            </div>
+            <div class="slider3">
+                <img src="https://via.placeholder.com/1080x640" alt="">
+            </div>
+        </div>
+        
+        <!-- MENU   -->
+
+        <div class="btn_menu">
+            
+            <ul>
+                <li><a href="#!">가게현황<br/>알아보기</a></li>
+                <li><a href="#!">매출정보<br/>알아보기</a></li>
+                <li><a href="#!">유동인구<br/>알아보기</a></li>
+                <li><a href="#!">온통대전<br/>소비분석</a></li>
+                <li><a href="#!">방문자<br/>소비분석</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- FOOTER   -->
+    <footer class="footer_layout">
+        <div class="ft_top">
+            
+            <div class="ft_type1">
+            <!-- 실과/직속기관 -->
+            </div>
+            <div class="ft_type2">
+            <!-- 행정동복지센타 -->            
+            </div>
+            <div class="ft_type3">
+            <!-- 유관기관 -->            
+            </div>
+            <div class="ft_type4">
+            <!-- 대전시자치기관 -->            
+            </div>
+        </div>
+        <div class="ft_body">
+            <a href="">개인정보처리방침</a> 
+            <a href="">사이트맵</a>                 
+            <a href="">찾아오시는길</a>
+        </div>
+        <div class="ft_wrapper">
+            <address>(우 34139) 대전광역시 유성구 대학로 211유성구청 대표전화 : 042-611-2114 / 대표팩스 : 042-611-2569</address>
+            <p>Copyright ⓒ 2021 DAEJEON YUSEONG-GU. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="./img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="manifest" href="./img/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <title>유성구 데이타시각화</title>
+    <!-- <link rel="stylesheet" href="css/index.css" /> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/main02.css" />
+    <link rel="stylesheet" href="./fonts/font.css" />
+    <link rel="stylesheet" href="./fonts/notosanskr/stylesheets/NotoSansKR-Hestia.css" />
+    <script src="./js/index.js"></script>
+</head>
+<style>
+    /* .hd_wrapper .hd_menu nav > ul#main_menu > li:last-child{ position: relative; } */
+    /* ul#sub_menu { border:1px solid #ccc;background: #fcfafc;position:absolute; text-align: center; margin:0; opacity:0;visibility:none; z-index:999; } */
+    /* ul#sub_menu > li { border-bottom: 1px solid #ccc;  } */
+    /* ul#sub_menu > li > a { display:block; text-decoration: none; height:100%; line-height: 82px;} */
+    /* #main_menu > li:hover #sub_menu { opacity:1;visibility:visible; } */
+    /* .sec02 { margin-bottom: 200px; }  */
+    /* .sec02 .sec02_inner { height:888px; } */
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu {
+        border: 1px solid #ccc;
+        background: #fcfafc;
+        position: absolute;
+        width: 160px;
+        text-align: center;
+        margin: 0;
+        opacity: 0;
+        visibility: none;
+        z-index: 999;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li {
+        border-bottom: 1px solid #ccc;
+        vertical-align: center;
+        width: 160px;
+        height: 80px;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a {
+        display: block;
+        padding: 0 25px;
+        color: #404751;
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 22px;
+        font-weight: 400;
+        line-height: 80px;
+        text-align: center;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a:hover>span {
+        color: #2b89c7;
+        transition: all 0.3s ease-out;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a>span {
+        position: relative;
+        text-align: center;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a:hover>span:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #2b89c7;
+        transition: all 0.3s ease-out;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li>#sub_menu>li>a:hover>span:hover:after {
+        left: 0;
+        width: 100%;
+    }
+
+    header>.hd_wrapper>.hd_menu>nav>#main_menu>li:hover #sub_menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    footer {
+        /* display: block; */
+        /* margin: 10px 0 0; */
+        /* border: 1px solid; */
+        /* width: 100%; */
+        /* position:absolute; */
+        width: 100%;
+        height: 192px;
+        /* bottom: 0; */
+        background-color: #404751;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    footer>.inner>span#addr {
+        display: inline-block;
+        height: 30px;
+        font-size: 23px;
+        color: #c1c3c6;
+        margin-left: 250px;
+        margin-top: 64px;
+        /* line-height: 23px; */
+    }
+
+    footer>.inner>span#copy1 {
+        display: inline-block;
+        height: 30px;
+        font-size: 23px;
+        color: #c1c3c6;
+        margin-left: 250px;
+        /* margin-top: 64px; */
+        /* line-height: 23px; */
+    }
+</style>
+
+<body>
+    <!-- sub_about.html -->
+    <div id="wrap">
+        <a href="#contens" class="skip">본문바로가기</a>
+        <header>
+            <div class="hd_wrapper">
+                <h1>
+                    <a href="./index.html">유성구데이타시각화</a>
+                </h1>
+                <!-- <a href="./main02.html"><img class="logo" src="yuseong_logo.png" alt="유성구데이타시각화로고"></a> -->
+                <h2 class="hide">대메뉴</h2>
+                <div class="hd_menu">
+                    <nav>
+                        <ul id="main_menu">
+                            <li>
+                                <a href="./sub_1.html"><span>가게현황 분석</span></a>
+                                <ul id="sub_menu">
+                                    <li><a href="./sub_1_1.html"><span>법정동별</span></a></li>
+                                    <li><a href="./sub_1_2.html"><span>상권별</span></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="./sub_2.html"><span>매출정보 분석</span></a>
+                            </li>
+                            <li>
+                                <a href="./sub_3.html"><span>유동인구 분석</span></a>
+                            </li>
+                            <li>
+                                <a href="./sub_4.html"><span>온통대전 소비분석</a>
+                            </li>
+                            <li>
+                                <a href="./sub_5.html"><span>방문객 소비분석</span></a>
+                            </li>
+                            <li>
+                                <a href="./sub_about.html"><span>도움말</span></a>
+                                <ul id="sub_menu">
+                                    <li><a href="./sub_about.html"><span>사이트소개</span></a></li>
+                                    <li><a href="./sub_sitemap.html"><span>사이트맵</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION FIRST PART  -->
+        <style>
+            .sec01 {
+                position: relative;
+                /* width: 100%; */
+                /* z-index: -1; */
+                height: 166px;
+                background: #E6EDF8;
+                text-align: center;
+                /* overflow: hidden; */
+            }
+
+            .sec01 .sec01_inner {
+                /* position:absolute; */
+                /* top:0; */
+                /* left:0; */
+                display: inline-block;
+                /* border: 1px solid #ccc; */
+                /* position: relative; */
+
+                width: 1420px;
+                height: 166px;
+                /* margin: 0 auto; */
+                background: url(./sub1/sec01_img.png) no-repeat center center;
+                position: relative;
+
+            }
+
+            .sec01 .sec01_inner>.sec01_img01 {
+                /* display: inline-block; */
+                /* border: 1px solid #ccc; */
+                /* display:inline; */
+                display: inline-block;
+                width: 212px;
+                height: 132px;
+                position: absolute;
+                left: 0;
+                top: 0px;
+                /* position:relative; */
+                /* vertical-align: top; */
+                /* position: relative; */
+            }
+
+            .sec01 .sec01_inner>.sec01_img02 {
+                /* display: inline-block; */
+                /* border: 1px solid #ccc; */
+                /* display:inline;                 */
+                z-index: 30;
+                width: 290px;
+                height: 196px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                /* position:relative; */
+                /* vertical-align: top; */
+                /* position: relative; */
+            }
+
+            .sec01 .sec01_inner>.sec01_img01>img {
+                /* display: block; */
+                /* position: absolute; */
+                /* right: 0; */
+                /* bottom:0; */
+                width: 142px;
+                height: 104px;
+                float: right;
+                /* left:0; */
+                /* bottom: 0; */
+                /* display: inline-block; */
+                /* width: 100%; */
+                /* height: 100%; */
+
+
+            }
+
+            .sec01 .sec01_inner>.sec01_img01>p {
+                text-align: left;
+                padding: 0;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 85px;
+                height: 79px;
+                font-size: 20px;
+                color: #036eb8;
+            }
+
+            .sec01 .sec01_inner>.sec01_img02>img {
+                /* display: block; */
+                /* position: absolute; */
+                /* right: 0; */
+                /* bottom:0; */
+                width: 290px;
+                height: 196px;
+                float: right;
+                /* left:0; */
+                /* bottom: 0; */
+                /* display: inline-block; */
+                /* width: 100%; */
+                /* height: 100%; */
+
+
+            }
+
+            .sec01 .sec01_inner>.sec01_title {
+                /* display: inline-block; */
+                /* position: absolute; */
+                /* border: 1px solid #ccc; */
+                width: 611px;
+                height: 48px;
+                /* position: absolute; */
+                /* left: 0; */
+                /* top:0; */
+                margin: 0 auto;
+                /* padding: 0 40px; */
+                /* font-size: 36px; */
+                text-align: center;
+                /* position: absolute; */
+                /* padding-top: 50%; */
+                /* transform:translateY(-50%); */
+                margin-top: 48px;
+
+            }
+
+            .sec01 .sec01_inner>.sec01_title>h1 {
+                /* display:inline-block; */
+                font-size: 36px;
+                font-weight: bold;
+                color: #404751;
+            }
+
+            .sec02 {
+                background-color: #fff;
+            }
+
+            .sec02 .sec02_inner {
+                border: 1px solid #ccc;
+                background-color: #fff;
+                width: 1420px;
+                height: 688px;
+                margin: 0 auto;
+                position: relative;
+            }
+
+            .sec02 .sec02_inner .sec02_left_part {
+                border-right: 1px solid #ccc;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 20%;
+                height: 100%;
+                /* 754 44*/
+            }
+
+            .sec02 .sec02_inner .sec02_right_part {
+                /* border-right: 1px solid #ccc; */
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 80%;
+                height: 100%;
+            }
+        </style>
+        <div id="contents" class="contents_wrapper">
+            <!-- SECTION_01 PART START  -->
+            <div class="sec01">
+                <div class="sec01_inner">
+                    <h1 class="hide">사이트소개</h1>
+                    <div class="sec01_img01">
+                        <img src="./sub1/left_img.png" alt="사이트소개 왼쪽이미지">
+                        <p>
+                            유성구<br>
+                            동네상권<br>
+                            알아보기
+                        </p>
+                    </div>
+                    <div class="sec01_img02">
+                        <img src="./sub1/right_img.png" alt="사이트소개 오른쪽이미지">
+                    </div>
+                    <div class="sec01_title">
+                        <h1>동네상권 분석 서비스란?</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- SECTION_02 PART START  -->
+            <style>
+                #location {
+                    height: 166px;
+                }
+
+                .location_inner {
+                    width: 1420px;
+                    height: 110px;
+                    margin: 0 auto;
+                    text-align: left;
+                    margin-bottom: 52px;
+                }
+
+                .location_inner .page_title {
+                    height: 33px;
+                    font-size: 25px;
+                    color: #404751;
+                    padding-top: 50px;
+                }
+
+                .location_inner .util_wrap {
+                    height: 44px;
+                    box-sizing: border-box;
+                }
+
+                .location_inner .util_wrap .location_wrap {
+                    float: left;
+                }
+
+                .location_inner .util_wrap .location_wrap>li {
+                    float: left;
+                    padding-right: 10px;
+                    vertical-align: top;
+                    text-align: center;
+                }
+
+                .location_inner .util_wrap .location_wrap>li>a {
+                    display: block;
+                    height: 44px;
+                    padding: 10px 0 0 16px;
+                    color: #666;
+                    font-size: 16px;
+                    line-height: 44px;
+                }
+
+                .location_inner .util_wrap .location_wrap>li:nth-child(1)>a {
+                    position: relative;
+                    padding-left: 0;
+                }
+
+                .location_inner .util_wrap .location_wrap>li:nth-child(1)>a:after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: 20px;
+                    width: 100%;
+                    height: 100%;
+                    background: url(arrow_1.png) no-repeat;
+                }
+
+                .location_inner .util_wrap .location_wrap>li:nth-child(2)>a {
+                    position: relative;
+                }
+
+                .location_inner .util_wrap .location_wrap>li:nth-child(2)>a:after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: 42px;
+                    width: 100%;
+                    height: 100%;
+                    background: url(arrow_1.png) no-repeat;
+                }
+
+                /* .location_inner .util_wrap .location_wrap > li:nth-child(2):after {content:""; background:url(left-arrow.png) no-repeat; } */
+                .location_inner .util_wrap .location_wrap>li:nth-child(1)>a>img {
+                    display: block;
+                    width: 16px;
+                    height: 15px;
+                    padding-top: 14px;
+                }
+
+                /* .location_inner .util_wrap .location_wrap > li:nth-child(1) > a { color:transparent;background: url(home_ic.png) no-repeat; } */
+                .location_inner .util_wrap .print_wrap {
+                    float: right;
+                    width: 240px;
+                }
+
+                .location_inner .util_wrap .print_wrap>li {
+                    float: left;
+                    position: relative;
+                }
+
+                .location_inner .util_wrap .print_wrap>li.n1>a {
+                    display: block;
+                    width: 21px;
+                    height: 22px;
+                    padding: 0 20px;
+                    line-height: 22px;
+                    color: transparent;
+                }
+
+                .location_inner .util_wrap .print_wrap>li.n1>a>span {
+                    display: block;
+                    width: 21px;
+                    height: 22px;
+                    background: url(ico_ir.png) no-repeat 0px -107px;
+                }
+
+                .location_inner .util_wrap .print_wrap>li.n1>a:hover {
+                    cursor: pointer;
+                    border-bottom: 2px solid #01917e;
+                    padding-bottom: 12px;
+                } 
+
+                .location_inner .util_wrap .print_wrap>li.n2>a {
+                    display: block;
+                    width: 21px;
+                    height: 22px;
+                    padding: 0 20px;
+                    line-height: 22px;
+                    color: transparent;
+                }
+                .location_inner .util_wrap .print_wrap>li.n2>a>span {
+                    display: block;
+                    width: 21px;
+                    height: 22px;
+                    background: url(ico_ir.png) no-repeat -19px -107px;
+                }
+                .location_inner .util_wrap .print_wrap>li.n2>a:hover {
+                    cursor: pointer;
+                    border-bottom: 2px solid #01917e;
+                    padding-bottom: 12px;
+                }                
+                .location_inner .util_wrap .print_wrap>li.n3>a {
+                    display: block;
+                    width: 21px;
+                    height: 22px;
+                    line-height: 22px;
+                    color: transparent;
+                }
+
+                .location_inner .util_wrap .print_wrap>li.n3>a>span {
+                    display: block;
+                    width: 21px;
+                    height: 22px;
+                    background: url(ico_ir.png) no-repeat -43px -107px;
+                }
+
+                .location_inner .util_wrap .print_wrap>li.n3>a:hover {
+                    cursor: pointer;
+                    border-bottom: 2px solid #01917e;
+                    padding-bottom: 12px;
+                }
+
+                #location .hd_line {
+                    width: 1420px;
+                    margin: 0 auto;
+                    height: 100%;
+                    background: url(hd_line.png) no-repeat;
+                }
+            </style>
+            <div id="location" class="title_wrap">
+                <div class="location_inner">
+                    <h1 class="hide">사이트소개 상단메뉴</h1>
+                    <h2 class="page_title">사이트 소개</h2>
+                    <div class="util_wrap">
+                        <!-- 로케이션시작 -->
+                        <ul class="location_wrap">
+                            <li><a href="./"><img src="home_ic.png" alt="홈이미지"></a></li>
+                            <li><a href="./sub_about.html">도움말</a></li>
+                            <li><a href="#!">사이트 소개</a></li>
+                        </ul>
+                        <!-- 프린트시작 -->
+                        <ul class="print_wrap">
+                            <li class="n1"><a href="#!"><span>sns</span></a></li>
+                            <li class="n2"><a href="#!"><span>copy</span></a></li>
+                            <li class="n3"><a href="#!"><span>print</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hd_line"></div>
+            </div>
+            <!-- MAIN CONTENT -->
+            <style>
+                #contents {
+                    background: #fff;
+                }
+
+                #contents #help_wrap {
+                    width: 1420px;
+                    margin: 0 auto;
+                }
+
+                #contents #help_wrap .help_sec01 {
+                    position: relative;
+                    background: #fff;
+                }
+
+                #contents #help_wrap .help_sec01>h2 {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    color: #036EB8;
+                    width: 940px;
+                    height: 51px;
+                    font-size: 38px;
+                    line-height: 51px;
+                    padding-top: 52px;
+                    margin-bottom: 26px;
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>p {
+                    display: inline-block;
+                    width: 100%;
+                    color: #666;
+                    margin: 120px auto;
+                    padding: 0 463px;
+                    box-sizing: border-box;
+                    font-size: 17px;
+                    letter-spacing: -1px;
+                    margin-bottom: 88px;
+                }
+
+                #contents #help_wrap .help_sec01>p span {
+                    font-weight: bold;
+                }
+
+                #contents #help_wrap .help_sec01>.card {
+                    width: 1200px;
+                    height: 370px;
+                    margin: 0 auto;
+                    position: relative;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item01 {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 180px;
+                    height: 216px;
+                    margin-top: 30px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item01 .title {
+                    border: 1px solid #ccc;
+                    height: 35px;
+                    border-radius: 18px;
+                    background: #036eb8;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 35px;
+                    margin-bottom: 20px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item02 {
+                    position: absolute;
+                    left: 300px;
+                    top: 0;
+                    width: 252px;
+                    height: 297px;
+                    margin-top: 30px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item02 .title {
+                    border: 1px solid #ccc;
+                    height: 35px;
+                    border-radius: 18px;
+                    background: #036eb8;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 35px;
+                    margin-bottom: 40px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item02>.content {
+                    width: 252px;
+                    height: 231px;
+                    background: url(02.png) no-repeat;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03 {
+                    position: absolute;
+                    left: 700px;
+                    top: 0;
+                    width: 180px;
+                    height: 312px;
+                    margin-top: 30px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03 .title {
+                    border: 1px solid #ccc;
+                    height: 35px;
+                    border-radius: 18px;
+                    background: #036eb8;
+                    color: #fff;
+                    text-align: center;
+                    line-height: 35px;
+                    margin-bottom: 20px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul {
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li {
+                    padding: 6px 0;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li>span {
+                    border: 1px solid #C2CDDE;
+                    display: inline-block;
+                    width: 160px;
+                    height: 50px;
+                    border-radius: 27px;
+                    line-height: 50px;
+                    background: #fff;
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(1)>span {
+                    position: relative;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(1)>span:before {
+                    content: '';
+                    position: absolute;
+                    left: 20px;
+                    bottom: -10px;
+                    width: 54px;
+                    height: 54px;
+                    background: url(03_01.png) no-repeat;
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(2)>span {
+                    position: relative;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(2)>span:before {
+                    content: '';
+                    position: absolute;
+                    left: 20px;
+                    bottom: -10px;
+                    width: 54px;
+                    height: 54px;
+                    background: url(03_02.png) no-repeat;
+                    line-height: 54px;
+                    text-align: center;
+                }
+
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(3)>span {
+                    position: relative;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(3)>span:before {
+                    content: '';
+                    position: absolute;
+                    left: 20px;
+                    bottom: -10px;
+                    width: 54px;
+                    height: 54px;
+                    background: url(03_03.png) no-repeat;
+                    line-height: 54px;
+                    text-align: center;
+                }
+
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(4)>span {
+                    position: relative;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item03>ul>li:nth-child(4)>span:before {
+                    content: '';
+                    position: absolute;
+                    left: 20px;
+                    bottom: -10px;
+                    width: 54px;
+                    height: 54px;
+                    background: url(03_04.png) no-repeat;
+                    line-height: 54px;
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item_gap01 {
+                    position: absolute;
+                    left: 190px;
+                    top: 160px;
+                    width: 80px;
+                    margin: 0 40px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item_gap02 {
+                    position: absolute;
+                    left: 568px;
+                    top: 160px;
+                    width: 80px;
+                    margin: 0 40px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item_gap03 {
+                    position: absolute;
+                    left: 890px;
+                    top: 160px;
+                    width: 80px;
+                    margin: 0 40px;
+                }
+
+                /* #contents #help_wrap .help_sec01 > .card > ul {text-align:center} */
+                /* #contents #help_wrap .help_sec01 > .card > .item01 > li {  width:100%;height:30px;} */
+                #contents #help_wrap .help_sec01>.card>.item01>ul {
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item01>ul>li {
+                    padding: 2px 0;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item01>ul>li>span {
+                    border: 1px solid #ccc;
+                    display: inline-block;
+                    width: 160px;
+                    height: 30px;
+                    border-radius: 18px;
+                    line-height: 30px;
+                    background: #f0f0f0;
+                    text-align: center;
+                }
+
+
+
+                #contents #help_wrap .help_sec01>.card>.item04 {
+                    display: inline;
+                    position: absolute;
+                    left: 1000px;
+                    top: -14px;
+                    width: 200px;
+                    height: 412px;
+                    margin-top: 30px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item04>.n1 {
+                    width: 116px;
+                    height: 116px;
+                    border-radius: 50%;
+                    background: #00A8DF;
+                    margin-left: 50px;
+                    margin-bottom: 20px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item04>.n1>span {
+                    display: inline-block;
+                    color: #fff;
+                    width: 116px;
+                    height: 110px;
+                    line-height: 110px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item04>.n2 {
+                    width: 116px;
+                    height: 116px;
+                    border-radius: 50%;
+                    background: #00D5DF;
+                    margin-left: 50px;
+                    margin-bottom: 20px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item04>.n2>span {
+                    display: inline-block;
+                    color: #fff;
+                    width: 116px;
+                    height: 110px;
+                    line-height: 110px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    text-align: center;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item04>.n3 {
+                    width: 116px;
+                    height: 116px;
+                    border-radius: 50%;
+                    background: #00D0A8;
+                    margin-left: 50px;
+                }
+
+                #contents #help_wrap .help_sec01>.card>.item04>.n3>span {
+                    display: inline-block;
+                    color: #fff;
+                    width: 116px;
+                    height: 110px;
+                    line-height: 20px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    text-align: center;
+                    margin-top: 20px;
+                }
+            </style>
+            <div id="contents">
+                <div id="help_wrap">
+                    <div class="help_sec01">
+                        <h1 class="hide">데이터수집 소개</h1>
+                        <h2>상권 분석, 유성구청과 함께하면 어렵지 않아요!</h2>
+                        <p>
+                            <span>유성구청</span>과 <span>빅디퍼</span>가 빅데이터를 수집 및 분석하여 창업을 준비중이신 분,
+                            또는 이미 자영업에 종사 중이신 분들에게 필요한 정보를 드리고자 합니다.
+                        </p>
+                        <div class="card">
+                            <div class="item01">
+                                <div class="title">
+                                    <h3>빅데이터수집</h3>
+                                </div>
+                                <ul>
+                                    <li><span>공공데이터</span></li>
+                                    <li><span>유성구 매출 정보</span></li>
+                                    <li><span>내국인 소비동향</span></li>
+                                    <li><span>외국인 소비동향</span></li>
+                                </ul>
+                            </div>
+                            <div class="item_gap01">
+                                <img src="send.png" alt="화상표이미지">
+                            </div>
+                            <div class="item02">
+                                <div class="title">
+                                    <h3>데이터 분석</h3>
+                                </div>
+                                <div class="content">
+
+                                </div>
+                            </div>
+                            <div class="item_gap02">
+                                <img src="send.png" alt="화상표이미지">
+                            </div>
+                            <div class="item03">
+                                <div class="title">
+                                    <h3>다양한 상권 정보</h3>
+                                </div>
+                                <ul>
+                                    <li><span>내 상권</span></li>
+                                    <li><span>다른 상권</span></li>
+                                    <li><span>기간</span></li>
+                                    <li><span>지역</span></li>
+                                </ul>
+                            </div>
+                            <div class="item_gap03">
+                                <img src="send.png" alt="화상표이미지">
+                            </div>
+                            <div class="item04">
+                                <div class="n1"><span>예비창업자</span></div>
+                                <div class="n2"><span>자영업자</span></div>
+                                <div class="n3"><span>그 밖에<br> 상권정보가<br> 필요한 분</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 이렇게 활용해보세요 -->
+                    <!--    width:380px; height:368px; width:140px;height:140px;  -->
+                    <style>
+                        .help_sec02 {
+                            border-top: 1px solid #ccc;
+                            border-bottom: 1px solid #ccc;
+                            width: 1200px;
+                            box-sizing: border-box;
+                            vertical-align: middle;
+                            margin: 0 auto;
+                        }
+
+                        .help_sec02 h2 {
+                            font-size: 25px;
+                            color: #036EB8;
+                            text-align: center;
+                            margin: 58px 0;
+                        }
+
+                        /* .help_sec02 p { width: } */
+                        .help_sec02 .sec02_card_wrap {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 1200px;
+                            height: 500px;
+                            text-align: center;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 {
+                            width: 380px;
+                            height: 368px;
+                            text-align: center;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 .title h3 {
+                            font-size: 17px;
+                            color: #036EB8;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 .img01 {
+                            display: inline-block;
+                            width: 140px;
+                            height: 140px;
+                            border: 1px solid #ccc;
+                            border-radius: 50%;
+                            text-align: center;
+                            position: relative;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 .img01 img {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 p,
+                        .help_sec02 .sec02_card_wrap .card01 li a {
+                            color: #666;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 ul {
+                            margin-top: 30px;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 ul li {
+                            margin: 10px 0;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card01 li a {
+                            border: 1px solid #ccc;
+                            display: inline-block;
+                            color: #666;
+                            width: 230px;
+                            height: 30px;
+                            font-size: 15px;
+                            text-align: center;
+                            line-height: 30px;
+                            position: relative;
+                        }
+
+                        /* .help_sec02 .sec02_card_wrap .card01 li a:after {content:"";position:absolute;top:0;left:0;width:8px; height:10px;background:url(left-arrow.png) no-repeat;} */
+                        .help_sec02 .sec02_card_wrap .card01 li a:after {
+                            content: "";
+                            position: absolute;
+                            top: 10px;
+                            left: 210px;
+                            width: 8px;
+                            height: 10px;
+                            background: url(left-arrow.png) no-repeat;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 .title h3 {
+                            font-size: 17px;
+                            color: #036EB8;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 {
+                            width: 380px;
+                            height: 368px;
+                            text-align: center;
+                            margin: 0 30px;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 .img02 {
+                            display: inline-block;
+                            width: 140px;
+                            height: 140px;
+                            border: 1px solid #ccc;
+                            border-radius: 50%;
+                            text-align: center;
+                            position: relative;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 .img02 img {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 .title h3 {
+                            font-size: 17px;
+                            color: #036EB8;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 p,
+                        .help_sec02 .sec02_card_wrap .card02 li a {
+                            color: #666;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 ul {
+                            margin-top: 30px;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 ul li {
+                            margin: 10px 0;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card02 li a {
+                            border: 1px solid #ccc;
+                            display: inline-block;
+                            color: #666;
+                            width: 230px;
+                            height: 30px;
+                            font-size: 15px;
+                            text-align: center;
+                            line-height: 30px;
+                            position: relative;
+                        }
+
+                        /* .help_sec02 .sec02_card_wrap .card01 li a:after {content:"";position:absolute;top:0;left:0;width:8px; height:10px;background:url(left-arrow.png) no-repeat;} */
+                        .help_sec02 .sec02_card_wrap .card02 li a:after {
+                            content: "";
+                            position: absolute;
+                            top: 10px;
+                            left: 210px;
+                            width: 8px;
+                            height: 10px;
+                            background: url(left-arrow.png) no-repeat;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 {
+                            width: 380px;
+                            height: 368px;
+                            text-align: center;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 .img03 {
+                            display: inline-block;
+                            width: 140px;
+                            height: 140px;
+                            border: 1px solid #ccc;
+                            border-radius: 50%;
+                            text-align: center;
+                            position: relative;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 .img03 img {
+                            position: absolute;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+
+                        /* .help_sec02 .sec02_card_wrap .card03 .img03 img {display: inline-block;width:106px;height:94px;line-height:94px;} */
+                        .help_sec02 .sec02_card_wrap .card03 .title h3 {
+                            font-size: 17px;
+                            color: #036EB8;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 p,
+                        .help_sec02 .sec02_card_wrap .card03 li a {
+                            color: #666;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 ul {
+                            margin-top: 30px;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 ul li {
+                            margin: 10px 0;
+                        }
+
+                        .help_sec02 .sec02_card_wrap .card03 li a {
+                            border: 1px solid #ccc;
+                            display: inline-block;
+                            color: #666;
+                            width: 230px;
+                            height: 30px;
+                            font-size: 15px;
+                            text-align: center;
+                            line-height: 30px;
+                            position: relative;
+                        }
+
+                        /* .help_sec02 .sec02_card_wrap .card01 li a:after {content:"";position:absolute;top:0;left:0;width:8px; height:10px;background:url(left-arrow.png) no-repeat;} */
+                        .help_sec02 .sec02_card_wrap .card03 li a:after {
+                            content: "";
+                            position: absolute;
+                            top: 10px;
+                            left: 210px;
+                            width: 8px;
+                            height: 10px;
+                            background: url(left-arrow.png) no-repeat;
+                        }
+                    </style>
+                    <div class="help_sec02">
+                        <h1 class="hide">빅데이터 활용</h1>
+                        <h2>이렇게 활용해 보세요</h2>
+                        <!-- <p>
+                            유성구청과 빅디퍼가 빅데이터를 수집 및 분석하여 창업을 준비중이신 분, 
+                            또는 이미 자영업에 종사 중이신 분들에게 필요한 정보를 드리고자 합니다. 
+                        </p> -->
+                        <div class="sec02_card_wrap">
+                            <div class="card01">
+                                <div class="img01">
+                                    <img src="sec02_img01.png" alt="첫번째 카드이미지">
+                                </div>
+                                <div class="title">
+                                    <h3>지역별 소상공인 사업체 정보 제공</h3>
+                                </div>
+                                <p>
+                                    유성구 내 지역의 업종별 사업체 수,<br>
+                                    지역별 유동인구 및 지하철 승하차 <br>
+                                    인구 현황을 알려드립니다.
+                                </p>
+                                <ul>
+                                    <li><a href="./sub_1.html"><span>우리동네 자영업 바로가기</span></a></li>
+                                    <li><a href="./sub_3.html"><span>우리동네 유동인구 바로가기</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="card02">
+                                <div class="img02">
+                                    <img src="sec02_img02.png" alt="두번째 카드이미지">
+                                </div>
+                                <div class="title">
+                                    <h3>현지인 소비 동향 정보 제공</h3>
+                                </div>
+                                <p>
+                                    유성구에서 일어나는 소비 현황과<br>
+                                    지역화폐 사용처를<br>
+                                    알려드립니다.
+                                </p>
+                                <ul>
+                                    <li><a href="./sub_2.html"><span>매출 정보 분석 바로가기</span></a></li>
+                                    <li><a href="./sub_4.html"><span>온통대전 소비 분석 바로가기</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="card03">
+                                <div class="img03">
+                                    <img src="sec02_img03.png" alt="세번째 카드이미지">
+                                </div>
+                                <div class="title">
+                                    <h3>외지인 소비 동향 정보 제공</h3>
+                                </div>
+                                <p>
+                                    외국인의 소비와 대전에 살지 않는<br>
+                                    타 지역 거주민의<br>
+                                    소비 동향을 알려드립니다
+                                </p>
+                                <ul>
+                                    <li><a href="./sub_5.html"><span>외국인 소비동향 바로가기</span></a></li>
+                                    <li><a href="./sub_5.html"><span>외지인 소비동향 바로가기</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        /* div .help_sec03 { text-align: center; } */
+
+                        .help_sec04 h2 {
+                            font-size: 25px;
+                            color: #036EB8;
+                            text-align: center;
+                            margin: 58px 0;
+                        }
+
+                        table.help_sec04 {
+                            width: 1200px;
+                            margin: 0 auto;
+                            background-color: #fff;
+                            text-align: center;
+                            border-top: 2px solid #394049;
+                        }
+
+                        table tr th {
+                            height: 45px;
+                            border-bottom: 1px solid #ddd;
+                            background-color: #f0f0f0;
+                        }
+
+                        /* table tr { border: 1px solid #ddd; } */
+                        /* table tr { border-right: 1px solid #ddd; } */
+                        table tr th .n1 {
+                            width: 218px;
+                        }
+
+                        table tr th .n2 {
+                            width: 782px;
+                        }
+
+                        table tr th .n3 {
+                            width: 200px;
+                        }
+
+                        table tr td {
+                            height: 45px;
+                            font-family: 'Malgun Gothic', '맑은 고딕';
+                            font-size: 15px;
+                            letter-spacing: -2px;
+                            border-right: 1px solid #ddd;
+                            border-bottom: 1px solid #ddd;
+                        }
+
+                        table tr td:last-child {
+                            border-right: transparent;
+                        }
+                    </style>
+                    <div class="help_sec04">
+                        <h1 class="hide">데이터 출처</h1>
+                        <h2>데이터 출처</h2>
+                        <table class="help_sec04">
+                            <tr>
+                                <th class="n1">데이터명</th>
+                                <th class="n2">데이터 내용</th>
+                                <th class="n3">데이터 출처</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>표준산업분류코드</span>
+                                </td>
+                                <td>
+                                    <span>국내 산업활동을 성질 에 따라 분류하는 단위</span>
+                                </td>
+                                <td>
+                                    <span>통계청</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>상가(상권) 정보</span>
+                                </td>
+                                <td>
+                                    <span>소상공인 상가 주소, 점포 수, 업종정보 </span>
+                                </td>
+                                <td>
+                                    <span>소상공인시장진흥공단</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>지역 상권 정보</span>
+                                </td>
+                                <td>
+                                    <span>유성구내 주요상권 영역 및 업종 정보</span>
+                                </td>
+                                <td>
+                                    <span>대전 유성구 </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>매출 현황 정보</span>
+                                </td>
+                                <td>
+                                    <span>유성구내 주요상권 영역 및 업종 정보</span>
+                                </td>
+                                <td>
+                                    <span>KB카드</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>유동 인구</span>
+                                </td>
+                                <td>
+                                    <span>기준년월, 업종, 법정동별 매출 통계, 성/연령대별 소비 통계</span>
+                                </td>
+                                <td>
+                                    <span>KT</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>지하철 이용자 수</span>
+                                </td>
+                                <td>
+                                    <span>지하철역 시간대별 승하차인원</span>
+                                </td>
+                                <td>
+                                    <span>대전도시철도공사</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>지역화폐 이용 정보</span>
+                                </td>
+                                <td>
+                                    <span>지역화폐 소비 정보. 기간/거주지별, 성/연령대별 통계, 업종별 증감률 </span>
+                                </td>
+                                <td>
+                                    <span>하나카드</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>외지인(내국인) 소비 정보</span>
+                                </td>
+                                <td>
+                                    <span>타지인의 유성구 내 소비 정보(매출건수, 매출액, 회원수). 지역별, 업종별, 요일별, 성/연령대별 통계 </span>
+                                </td>
+                                <td>
+                                    <span>KB카드</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>외국인 소비 정보</span>
+                                </td>
+                                <td>
+                                    <span>외국인의 유성구 내 소비 정보(매출건수, 매출액, 회원수). 지역별, 국가별, 종별, 기간별, 성/연령대별 통계</span>
+                                </td>
+                                <td>
+                                    <span>하나카드</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--  page contnets part -->
+            </div>
+
+            <!-- contents part end -->
+        </div>
+
+        <!-- FOOTER PART -->
+        <footer include-html="footer.html"></footer>
+        <!-- FOOTER PART END-->
+    </div>
+    <script type="text/javascript">
+        includeHTML();
+    </script>
+
+</body>
+
+</html>

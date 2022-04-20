@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'AppleSDGothicNeoB';
+  src: url('AppleSDGothicNeoB.woff2') format('woff2');
+  src: url('AppleSDGothicNeoB.woff') format('woff'),
+   url('AppleSDGothicNeoB.ttf') format('truetype'),
+   url('AppleSDGothicNeoB.svg#AppleSDGothicNeoB') format('svg'),
+   url('AppleSDGothicNeoB.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
